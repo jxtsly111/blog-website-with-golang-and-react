@@ -1,4 +1,4 @@
-module github.com/jxtsly/blog
+module github.com/jxtsly111/blog
 
 go 1.21.1
 
