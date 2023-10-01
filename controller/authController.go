@@ -2,6 +2,7 @@ package controller
 
 import (
 	"fmt"
+	"log"
 	"regexp"
 	"strings"
 
@@ -48,5 +49,14 @@ func Register(c *fiber.Ctx) error {
 		Phone:     data["phone"].(string),
 		Email:     strings.TrimSpace(data["email"].(string)),
 	}
-
+	user.SetPassword(data["password"].(string))
+	err := database.DB.Create(&user)
+	if err != nil {
+		log.Println(err)
+	}
+	c.Status(200)
+	return c.JSON(fiber.Map{
+		"user":    user,
+		"message": "Account Created Succesfully",
+	})
 }
