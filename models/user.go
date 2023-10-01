@@ -8,3 +8,8 @@ type User struct {
 	Password  []byte `json:"-"`
 	Phone     string `json:"phone"`
 }
+
+func (user *User)  SetPassword(password string){
+	hashedPassword, := bycrypt GenerateFromPassword([]byte(password),14)
+	user.Password = hashedPassword
+}
