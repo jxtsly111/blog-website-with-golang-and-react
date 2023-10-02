@@ -60,3 +60,18 @@ func Register(c *fiber.Ctx) error {
 		"message": "Account Created Succesfully",
 	})
 }
+
+func Login(c *fiber.Ctx) error {
+	var data map[string]string
+	var userData models.User
+	if err := c.BodyParser(&data); err != nil {
+		fmt.Println("Unable to parse body")
+	}
+	var user models.User
+	database.DB.Where("email=?", data["email"]).First(&user)
+	if userData.Id == 0 {
+		c.Status(400)
+		return c.JSON(fiber.Map{
+			"message": "Email Address doesnt exit, kinly create an account",
+		})
+}
