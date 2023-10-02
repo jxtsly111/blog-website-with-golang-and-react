@@ -1,7 +1,7 @@
 package util
 
 import (
-	"go/token"
+	// "go/token"
 	"time"
 
 	"github.com/golang-jwt/jwt"
